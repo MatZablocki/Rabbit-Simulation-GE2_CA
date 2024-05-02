@@ -1,7 +1,188 @@
-[gd_scene load_steps=11 format=3 uid="uid://yiomnhy6tf0n"]
+[gd_scene load_steps=13 format=3 uid="uid://yiomnhy6tf0n"]
+
+[ext_resource type="Script" path="res://Scenes/rabbit.gd" id="1_nqnyx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5cukx"]
 size = Vector3(1.5, 1, 1)
+
+[sub_resource type="Animation" id="Animation_oa0be"]
+resource_name = "hop"
+length = 0.6
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node3D/Back Leg Offset:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.45, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -1.809), Vector3(0, 0, -1.809), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node3D/Back Leg Offset/Lower Leg:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.45, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 1.58232), Vector3(0, 0, 0.436332), Vector3(0, 0, 0.436332), Vector3(0, 0, 1.58232)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Node3D/Front Leg Offset:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0.961939), Vector3(0, 0, -0.834494), Vector3(0, 0, 1.83356), Vector3(0, 0, 0.961939)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Node3D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.35, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.458125, 0), Vector3(0, 0.649571, 0), Vector3(0, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Node3D:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.3, 0.45, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.021773), Vector3(0, 0, -0.146136), Vector3(0, 0, -0.4175), Vector3(0, 0, -0.261497)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Node3D/Tail Offset:quaternion")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Quaternion(0, 0, 0.981567, 0.191117), Quaternion(0, 0, 0.981567, 0.191117), Quaternion(0, 0, -0.722364, 0.691513)]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.2, 0.35, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [30.0],
+"method": &"movement"
+}, {
+"args": [24.0],
+"method": &"movement"
+}, {
+"args": [20.0],
+"method": &"movement"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_ye0pk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node3D/Back Leg Offset:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node3D/Front Leg Offset:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0.961939)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Node3D/Back Leg Offset/Lower Leg:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 1.58232)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Node3D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Node3D:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Node3D/Tail Offset:quaternion")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Quaternion(0, 0, 0.981567, 0.191117)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mruc6"]
+_data = {
+"RESET": SubResource("Animation_ye0pk"),
+"hop": SubResource("Animation_oa0be")
+}
 
 [sub_resource type="BoxMesh" id="BoxMesh_w3br0"]
 size = Vector3(2, 0.8, 0.8)
@@ -24,80 +205,93 @@ size = Vector3(0.2, 0.8, 0.2)
 [sub_resource type="BoxMesh" id="BoxMesh_34yi6"]
 size = Vector3(0.2, 0.4, 0.4)
 
-[sub_resource type="Animation" id="Animation_oa0be"]
-resource_name = "hop"
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_mruc6"]
-_data = {
-"hop": SubResource("Animation_oa0be")
-}
-
-[node name="Rabbit" type="RigidBody3D"]
+[node name="Rabbit" type="RigidBody3D" node_paths=PackedStringArray("animation_player")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.468932, 0)
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+linear_velocity = Vector3(30, 0, 0)
+linear_damp = 10.0
+script = ExtResource("1_nqnyx")
+animation_player = NodePath("AnimationPlayer")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.179945, 0)
 shape = SubResource("BoxShape3D_5cukx")
 
-[node name="Body" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.964091, -0.265573, 0, 0.265573, 0.964091, 0, 0, 0, 1, 0, 0.462011, 0)
-mesh = SubResource("BoxMesh_w3br0")
-
-[node name="Head" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.999932, -0.0116411, 0, 0.0116411, 0.999932, 0, 0, 0, 1, 0.814433, 1.36939, 0)
-mesh = SubResource("BoxMesh_v8eah")
-
-[node name="Ear Left" type="MeshInstance3D" parent="Head"]
-transform = Transform3D(0.999932, 0.011579, 0.00120086, -0.0116411, 0.994598, 0.10315, 2.31858e-10, -0.103157, 0.994665, -0.27346, 0.504387, -0.176105)
-mesh = SubResource("BoxMesh_g33gk")
-skeleton = NodePath("../..")
-
-[node name="Ear Right" type="MeshInstance3D" parent="Head"]
-transform = Transform3D(0.999922, 0.0123964, 0.00173608, -0.0121523, 0.994628, -0.102793, -0.00300101, 0.102763, 0.994701, -0.27346, 0.504387, 0.170395)
-mesh = SubResource("BoxMesh_g33gk")
-skeleton = NodePath("../..")
-
-[node name="Front Leg Offset" type="Node3D" parent="."]
-transform = Transform3D(0.854095, -0.520116, 0, 0.520116, 0.854095, 0, 0, 0, 1, 0.932217, 0.311907, -0.0346368)
-
-[node name="Leg Front Left" type="MeshInstance3D" parent="Front Leg Offset"]
-transform = Transform3D(0.960774, 0.277331, 0, -0.277331, 0.960774, 0, 0, 0, 1, -0.0383697, -0.330306, -0.306959)
-mesh = SubResource("BoxMesh_etmhl")
-skeleton = NodePath("../..")
-
-[node name="Leg Front Right" type="MeshInstance3D" parent="Front Leg Offset"]
-transform = Transform3D(0.960774, 0.277331, 0, -0.277331, 0.960774, 0, 0, 0, 1, -0.0383697, -0.330306, 0.382726)
-mesh = SubResource("BoxMesh_etmhl")
-skeleton = NodePath("../..")
-
-[node name="Back Leg Offset" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.276251, 0.107326, 0)
-
-[node name="Upper Left" type="MeshInstance3D" parent="Back Leg Offset"]
-transform = Transform3D(-0.936532, 0.350583, 0, -0.350583, -0.936532, 0, 0, 0, 1, -0.185935, -0.0761651, -0.468979)
-mesh = SubResource("BoxMesh_3k6ti")
-skeleton = NodePath("Back Leg Left")
-
-[node name="Back Leg Left" type="MeshInstance3D" parent="Back Leg Offset/Upper Left"]
-transform = Transform3D(-0.350583, 0.936531, 0, -0.936531, -0.350583, 0, 0, 0, 1, -0.21189, 0.376757, 0.00430101)
-mesh = SubResource("BoxMesh_m13sw")
-skeleton = NodePath("../../..")
-
-[node name="Upper Right" type="MeshInstance3D" parent="Back Leg Offset"]
-transform = Transform3D(-0.936532, 0.350583, 0, -0.350583, -0.936532, 0, 0, 0, 1, -0.185935, -0.0761651, 0.48555)
-mesh = SubResource("BoxMesh_3k6ti")
-skeleton = NodePath("../Upper Left/Back Leg Left")
-
-[node name="Back Leg Right" type="MeshInstance3D" parent="Back Leg Offset/Upper Right"]
-transform = Transform3D(-0.350583, 0.936531, 0, -0.936531, -0.350583, 0, 0, 0, 1, -0.21189, 0.376757, -0.00113988)
-mesh = SubResource("BoxMesh_m13sw")
-skeleton = NodePath("../../..")
-
-[node name="Tail" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.926948, -0.375189, 0, 0.375189, -0.926948, 0, 0, 0, 1, -0.879827, 0.764552, 0)
-mesh = SubResource("BoxMesh_34yi6")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_mruc6")
 }
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Body" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(0.964091, -0.265573, 0, 0.265573, 0.964091, 0, 0, 0, 1, 0, 0.462011, 0)
+mesh = SubResource("BoxMesh_w3br0")
+skeleton = NodePath("../..")
+
+[node name="Head" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(0.999932, -0.0116411, 0, 0.0116411, 0.999932, 0, 0, 0, 1, 0.814433, 1.36939, 0)
+mesh = SubResource("BoxMesh_v8eah")
+skeleton = NodePath("../..")
+
+[node name="Ear Left" type="MeshInstance3D" parent="Node3D/Head"]
+transform = Transform3D(0.999932, 0.011579, 0.00120086, -0.0116411, 0.994598, 0.10315, 2.31858e-10, -0.103157, 0.994665, -0.27346, 0.504387, -0.176105)
+mesh = SubResource("BoxMesh_g33gk")
+skeleton = NodePath("../../..")
+
+[node name="Ear Right" type="MeshInstance3D" parent="Node3D/Head"]
+transform = Transform3D(0.999922, 0.0123964, 0.00173608, -0.0121523, 0.994628, -0.102793, -0.00300101, 0.102763, 0.994701, -0.27346, 0.504387, 0.170395)
+mesh = SubResource("BoxMesh_g33gk")
+skeleton = NodePath("../../..")
+
+[node name="Front Leg Offset" type="Node3D" parent="Node3D"]
+transform = Transform3D(0.57193, -0.820302, 0, 0.820302, 0.57193, 0, 0, 0, 1, 0.851728, 0.302781, -0.0346368)
+
+[node name="Leg Front Left" type="MeshInstance3D" parent="Node3D/Front Leg Offset"]
+transform = Transform3D(0.960774, 0.277331, 0, -0.277331, 0.960774, 0, 0, 0, 1, -0.0383697, -0.330306, -0.306959)
+mesh = SubResource("BoxMesh_etmhl")
+skeleton = NodePath("../../..")
+
+[node name="Leg Front Right" type="MeshInstance3D" parent="Node3D/Front Leg Offset"]
+transform = Transform3D(0.960774, 0.277331, 0, -0.277331, 0.960774, 0, 0, 0, 1, -0.0383697, -0.330306, 0.382726)
+mesh = SubResource("BoxMesh_etmhl")
+skeleton = NodePath("../../..")
+
+[node name="Back Leg Offset" type="Node3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.459844, 0.16675, 0)
+
+[node name="Upper Left" type="MeshInstance3D" parent="Node3D/Back Leg Offset"]
+transform = Transform3D(-0.936532, 0.350583, 0, -0.350583, -0.936532, 0, 0, 0, 1, -0.00198224, -0.120733, -0.468979)
+mesh = SubResource("BoxMesh_3k6ti")
+skeleton = NodePath("../Lower Leg/Back Leg Left")
+
+[node name="Upper Right" type="MeshInstance3D" parent="Node3D/Back Leg Offset"]
+transform = Transform3D(-0.936532, 0.350583, 0, -0.350583, -0.936532, 0, 0, 0, 1, -0.00198224, -0.120733, 0.48555)
+mesh = SubResource("BoxMesh_3k6ti")
+skeleton = NodePath("../Lower Leg/Back Leg Left")
+
+[node name="Lower Leg" type="Node3D" parent="Node3D/Back Leg Offset"]
+transform = Transform3D(-0.0115189, -0.999933, 0, 0.999933, -0.0115189, 0, 0, 0, 1, 0.0404278, -0.402617, -0.00783101)
+
+[node name="Back Leg Left" type="MeshInstance3D" parent="Node3D/Back Leg Offset/Lower Leg"]
+transform = Transform3D(1, 7.45058e-08, 0, -7.45058e-08, 1, 0, 0, 0, 1, 0.00332391, -0.288116, -0.456847)
+mesh = SubResource("BoxMesh_m13sw")
+skeleton = NodePath("../../../..")
+
+[node name="Back Leg Right" type="MeshInstance3D" parent="Node3D/Back Leg Offset/Lower Leg"]
+transform = Transform3D(1, 7.45058e-08, 0, -7.45058e-08, 1, 0, 0, 0, 1, 0.00332391, -0.288116, 0.492241)
+mesh = SubResource("BoxMesh_m13sw")
+skeleton = NodePath("../../../..")
+
+[node name="Tail Offset" type="Node3D" parent="Node3D"]
+transform = Transform3D(-0.926948, -0.375189, 0, 0.375189, -0.926948, 0, 0, 0, 1, -0.980163, 0.553586, 0)
+rotation_edit_mode = 1
+
+[node name="Tail" type="MeshInstance3D" parent="Node3D/Tail Offset"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0138534, -0.233199, 0)
+mesh = SubResource("BoxMesh_34yi6")
+skeleton = NodePath("../../..")

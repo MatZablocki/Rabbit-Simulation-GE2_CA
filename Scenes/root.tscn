@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dibx1l6rj1yst"]
+[gd_scene load_steps=9 format=3 uid="uid://dibx1l6rj1yst"]
 
 [ext_resource type="Texture2D" uid="uid://yo76q6fowmig" path="res://Assets/Prototype/Dark/texture_01.png" id="1_34gg8"]
 [ext_resource type="PackedScene" uid="uid://yiomnhy6tf0n" path="res://Scenes/rabbit.tscn" id="2_k7fxj"]
+[ext_resource type="Texture2D" uid="uid://bjagocodh1n6o" path="res://Assets/Prototype/Orange/texture_01.png" id="3_nb77i"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tqqr4"]
 albedo_texture = ExtResource("1_34gg8")
@@ -13,6 +14,14 @@ size = Vector2(100, 100)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_my5b6"]
 points = PackedVector3Array(50.7837, 0.793495, 50.7837, -50.7837, -0.793495, -50.7837, -50.7837, 0.793495, -50.7837, 50.7837, -0.793495, -50.7837, -50.7837, -0.793495, 50.7837, -50.7837, 0.793495, 50.7837, 50.7837, 0.793495, -50.7837, 50.7837, -0.793495, 50.7837)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_364rn"]
+albedo_texture = ExtResource("3_nb77i")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_555og"]
+material = SubResource("StandardMaterial3D_364rn")
+size = Vector3(4, 4, 4)
 
 [node name="Root" type="Node3D"]
 
@@ -26,3 +35,28 @@ skeleton = NodePath("../..")
 shape = SubResource("ConvexPolygonShape3D_my5b6")
 
 [node name="Rabbit" parent="." instance=ExtResource("2_k7fxj")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.301704, 0.953402, 0, -0.953402, 0.301704, 0, 5.59899, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.22203, 2.06206, -7.19274)
+mesh = SubResource("BoxMesh_555og")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.908165, 0.216477, -0.358293, 0, 0.855906, 0.517131, 0.418612, -0.46964, 0.777304, 0, 9.92861, 14.6091)
+
+[node name="Rabbit2" parent="." instance=ExtResource("2_k7fxj")]
+transform = Transform3D(0.662908, 0, -0.748701, 0, 1, 0, 0.748701, 0, 0.662908, -10.6969, 0.417024, -0.574935)
+
+[node name="Rabbit3" parent="." instance=ExtResource("2_k7fxj")]
+transform = Transform3D(-0.308087, 0, 0.951358, 0, 1, 0, -0.951358, 0, -0.308087, 1.9035, 0.793495, 9.65439)
+
+[node name="Rabbit4" parent="." instance=ExtResource("2_k7fxj")]
+transform = Transform3D(0.74752, 0, 0.664239, 0, 1, 0, -0.664239, 0, 0.74752, 5, 1, 2)
+
+[node name="Rabbit5" parent="." instance=ExtResource("2_k7fxj")]
+transform = Transform3D(0.367102, 0, -0.930181, 0, 1, 0, 0.930181, 0, 0.367102, -4, 1, -7)
+
+[node name="Rabbit6" parent="." instance=ExtResource("2_k7fxj")]
+transform = Transform3D(0.0904414, 0, 0.995902, 0, 1, 0, -0.995902, 0, 0.0904414, -3, 1, 7)
