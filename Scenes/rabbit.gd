@@ -6,11 +6,18 @@ extends CharacterBody3D
 @onready var body = $Node3D
 @onready var enclosure_zone = Rect2(-24,-24, 50, 50)
 
-enum states {WANDERING, FLEEING}
+@export var hunger : Timer
+@export var starving : Timer
+@export var breeding_timer : Timer
+
+enum states {WANDERING, FLEEING, BREEDING, WAITING}
 var state = states.WANDERING
 var target
 var direction
 var speed = 15
+var player
+var nearest_grass
+var breeding = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	animation_player.speed_scale = 1
@@ -30,14 +37,21 @@ func _process(delta):
 	
 func _physics_process(delta):
 	if(state == states.FLEEING):
-		velocity = arrive_force(target, 1)
+		var combined_force = arrive_force(target, 1) + flee_force(player.get_global_position())
+		velocity += combined_force.normalized()*speed
 	elif(state == states.WANDERING):
-		pass
+		if breeding:
+			state = states.BREEDING
+		else:
+			velocity = arrive_force(nearest_grass, 1)
+	elif(state == states.WAITING):
+		velocity = Vector3.ZERO
 	if(velocity.length()>0.1):
 		animation_player.play("hop")
 	else:
 		animation_player.play("RESET")
 	move_and_slide()
+	
 	
 	pass
 	
@@ -45,6 +59,12 @@ func seek_force(target: Vector3):
 	var toTarget = target - global_transform.origin
 	toTarget = toTarget.normalized()
 	var desired = toTarget * speed
+	return desired - velocity
+	
+func flee_force(target: Vector3):	
+	var toTarget = target - global_transform.origin
+	toTarget = toTarget.normalized()
+	var desired = -toTarget * speed
 	return desired - velocity
 	
 func arrive_force(target:Vector3, slowingDistance:float):
@@ -59,23 +79,10 @@ func arrive_force(target:Vector3, slowingDistance:float):
 	var desired = (toTarget * limit_length) / dist 
 	return desired - velocity
 
-#func enclosure_steering() -> Vector3:
-	#var desired_velocity: Vector3 = Vector3.ZERO
-	#print(position.x, "  ", enclosure_zone.position.x)
-	#if position.x < enclosure_zone.position.x:
-		#desired_velocity.x += 1
-	#elif position.x > enclosure_zone.position.x + enclosure_zone.size.x:
-		#desired_velocity.x -= 1
-	#if position.z < enclosure_zone.position.y:
-		#desired_velocity.z += 1
-	#elif position.z > enclosure_zone.position.y + enclosure_zone.size.y:
-		#desired_velocity.z -= 1
-		#
-	#desired_velocity = desired_velocity.normalized() * speed
-	#if desired_velocity != Vector3.ZERO:
-		#return desired_velocity - velocity
-	#else:
-		#return Vector3.ZERO
+func stop_flee():
+	state = states.WANDERING
+	print("ss")
+
 	
 func to_nearest_bush():
 	var nearest = 99999
@@ -87,13 +94,38 @@ func to_nearest_bush():
 			nearest = temp_length
 			var temp = bush.get_global_position()
 			target = Vector3(temp.x,0,temp.z)
-	#direction = (target - get_global_position()).normalized()
-	#direction = Vector3(direction.x,0,direction.z)
-	#look_at(direction)
-	pass
+	return target
 
+func to_nearest_grass():
+	var nearest = 99999
+	var near_grass
+	for x in grass:
+		var temp_vector = x.get_global_position() - get_global_position()
+		var temp_length = temp_vector.length()
+		if temp_length <= nearest:
+			nearest = temp_length
+			var temp = x.get_global_position()
+			nearest_grass = Vector3(temp.x,0,temp.z)
+
+	return target
 
 func _on_area_3d_body_entered(body):
 	state = states.FLEEING
+	player = body
 	to_nearest_bush()
+	pass # Replace with function body.
+
+
+func _on_hunger_timeout():
+	starving.start()
+	pass # Replace with function body.
+
+
+func _on_starving_timeout():
+	queue_free()
+	pass # Replace with function body.
+
+
+func _on_breeding_timeout():
+	breeding = true
 	pass # Replace with function body.
