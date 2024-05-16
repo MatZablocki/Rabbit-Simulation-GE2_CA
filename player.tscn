@@ -1,0 +1,169 @@
+[gd_scene load_steps=12 format=3 uid="uid://dh8ekxmg0r8m7"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_7l1ga"]
+
+[sub_resource type="Animation" id="Animation_q6j1r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AllMoving/Pivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AllMoving:quaternion")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Quaternion(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_y4get"]
+resource_name = "roll"
+length = 0.5
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:iFrames")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.02, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AllMoving:quaternion")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.25, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Quaternion(0, 0, 0, 1), Quaternion(-0.701015, 0, 0, 0.713146), Quaternion(0.999879, 0, 0, 0.015559), Quaternion(0.720981, 0, 0, 0.692955), Quaternion(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_psmj8"]
+resource_name = "weapon_swing"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AllMoving/Pivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-2.96706, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AllMoving/Pivot/Weapon/HurtBox/CollisionShape3D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2355c"]
+_data = {
+"RESET": SubResource("Animation_q6j1r"),
+"roll": SubResource("Animation_y4get"),
+"weapon_swing": SubResource("Animation_psmj8")
+}
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_plngg"]
+radius = 0.3
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y7vd7"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_pfbu2"]
+radius = 0.3
+
+[sub_resource type="BoxMesh" id="BoxMesh_xr7bx"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_k5wav"]
+size = Vector3(0.1, 1.4, 0.1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_reu7i"]
+radius = 0.2
+height = 1.45198
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera_mount", "animation_player")]
+script = ExtResource("1_7l1ga")
+camera_mount = NodePath("CameraMount")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="CameraMount" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.07679, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraMount"]
+transform = Transform3D(1, 0, 0, 0, 0.978347, 0.206973, 0, -0.206973, 0.978347, 0, 0.570374, 3.85179)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2355c")
+}
+
+[node name="Hitbox" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_plngg")
+
+[node name="GroundDetection" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+shape = SubResource("BoxShape3D_y7vd7")
+
+[node name="AllMoving" type="Node3D" parent="."]
+rotation_edit_mode = 1
+
+[node name="Body" type="MeshInstance3D" parent="AllMoving"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_pfbu2")
+skeleton = NodePath("../..")
+
+[node name="Head" type="MeshInstance3D" parent="AllMoving/Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1762, 0)
+mesh = SubResource("BoxMesh_xr7bx")
+skeleton = NodePath("../../..")
+
+[node name="Pivot" type="Node3D" parent="AllMoving"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.470429, 1.52588, -0.519045)
+
+[node name="Weapon" type="MeshInstance3D" parent="AllMoving/Pivot"]
+transform = Transform3D(1, 0, 0, 0, 0.999702, -0.0244147, 0, 0.0244147, 0.999702, -0.00368747, 0.57093, 0.0133147)
+mesh = SubResource("BoxMesh_k5wav")
+skeleton = NodePath("../../..")
+
+[node name="HurtBox" type="Area3D" parent="AllMoving/Pivot/Weapon"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0080736, 0.01129, -0.00470853)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AllMoving/Pivot/Weapon/HurtBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.273819, 0)
+shape = SubResource("CapsuleShape3D_reu7i")
+
+[connection signal="body_entered" from="AllMoving/Pivot/Weapon/HurtBox" to="." method="_on_hurt_box_body_entered"]

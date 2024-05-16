@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://yiomnhy6tf0n"]
+[gd_scene load_steps=13 format=3 uid="uid://yiomnhy6tf0n"]
 
 [ext_resource type="Script" path="res://Scenes/rabbit.gd" id="1_nqnyx"]
 
@@ -205,9 +205,6 @@ size = Vector3(0.2, 0.8, 0.2)
 [sub_resource type="BoxMesh" id="BoxMesh_34yi6"]
 size = Vector3(0.2, 0.4, 0.4)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_o4qv8"]
-radius = 11.715
-
 [node name="Rabbit" type="CharacterBody3D" node_paths=PackedStringArray("animation_player")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 script = ExtResource("1_nqnyx")
@@ -291,12 +288,3 @@ rotation_edit_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0138534, -0.233199, 0)
 mesh = SubResource("BoxMesh_34yi6")
 skeleton = NodePath("../../..")
-
-[node name="Area3D" type="Area3D" parent="."]
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-shape = SubResource("SphereShape3D_o4qv8")
-
-[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

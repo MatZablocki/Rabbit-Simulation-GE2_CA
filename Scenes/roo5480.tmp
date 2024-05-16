@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dibx1l6rj1yst"]
+[gd_scene load_steps=7 format=3 uid="uid://dibx1l6rj1yst"]
 
 [ext_resource type="PackedScene" uid="uid://yiomnhy6tf0n" path="res://Scenes/rabbit.tscn" id="2_k7fxj"]
 [ext_resource type="PackedScene" uid="uid://dh8ekxmg0r8m7" path="res://player.tscn" id="3_yuc6l"]
 [ext_resource type="PackedScene" uid="uid://bys71blvtyvdj" path="res://Scenes/bush.tscn" id="4_5e8pb"]
-[ext_resource type="PackedScene" uid="uid://dkyww70xef0sp" path="res://Scenes/tall grass.tscn" id="4_gmhrp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bx3yp"]
 albedo_color = Color(0.278431, 0.215686, 0.0666667, 1)
@@ -46,15 +45,3 @@ collision_layer = 3
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.2584, 0, -25.2673)
-
-[node name="Tall Grass" parent="." instance=ExtResource("4_gmhrp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.35465, 0.151451, 0)
-
-[node name="Tall Grass2" parent="." instance=ExtResource("4_gmhrp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.638203, 0.151451, 11.2908)
-
-[node name="Tall Grass3" parent="." instance=ExtResource("4_gmhrp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.6868, 0.151451, -14.0144)
-
-[node name="Tall Grass4" parent="." instance=ExtResource("4_gmhrp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.51605, 0.151451, -6.93757)
