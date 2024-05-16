@@ -3,6 +3,7 @@ extends CharacterBody3D
 @export var animation_player : AnimationPlayer
 @onready var bushes = [$"../Bush", $"../Bush2",$"../Bush3"]
 @onready var grass = [$"../Tall Grass", $"../Tall Grass2", $"../Tall Grass3", $"../Tall Grass4"]
+@onready var rabbit = load("res://Scenes/rabbit.tscn")
 @onready var body = $Node3D
 @onready var enclosure_zone = Rect2(-24,-24, 50, 50)
 
@@ -21,8 +22,8 @@ var breeding = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	animation_player.speed_scale = 1
-	
-	
+	breeding_timer.start()
+	state = states.WANDERING
 	
 	pass # Replace with function body.
 
@@ -36,16 +37,22 @@ func _process(delta):
 	pass
 	
 func _physics_process(delta):
+	if $Area3D.overlaps_body($"../Player"):
+		state = states.FLEEING
+		
 	if(state == states.FLEEING):
+		to_nearest_bush()
 		var combined_force = arrive_force(target, 1) + flee_force(player.get_global_position())
 		velocity += combined_force.normalized()*speed
 	elif(state == states.WANDERING):
-		if breeding:
-			state = states.BREEDING
-		else:
-			velocity = arrive_force(nearest_grass, 1)
-	elif(state == states.WAITING):
+		to_nearest_grass()
+		print("'")
+		velocity = arrive_force(nearest_grass, 0.1)
+	elif(state == states.BREEDING):
 		velocity = Vector3.ZERO
+		state = states.WANDERING
+		breeding_timer.start()
+		get_parent().add(rabbit)
 	if(velocity.length()>0.1):
 		animation_player.play("hop")
 	else:
@@ -81,8 +88,12 @@ func arrive_force(target:Vector3, slowingDistance:float):
 
 func stop_flee():
 	state = states.WANDERING
-	print("ss")
 
+func eat():
+	hunger.start()
+	starving.stop()
+	if(breeding_timer.is_stopped()):
+		state = states.BREEDING
 	
 func to_nearest_bush():
 	var nearest = 99999
@@ -112,7 +123,7 @@ func to_nearest_grass():
 func _on_area_3d_body_entered(body):
 	state = states.FLEEING
 	player = body
-	to_nearest_bush()
+	
 	pass # Replace with function body.
 
 
@@ -126,6 +137,3 @@ func _on_starving_timeout():
 	pass # Replace with function body.
 
 
-func _on_breeding_timeout():
-	breeding = true
-	pass # Replace with function body.

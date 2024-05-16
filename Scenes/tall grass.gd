@@ -9,7 +9,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	for body in area3d.get_overlapping_bodies():
-		body.stop_flee()
+		body.eat()
 	pass
 
 

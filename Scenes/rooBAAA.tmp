@@ -1,6 +1,5 @@
-[gd_scene load_steps=9 format=3 uid="uid://dibx1l6rj1yst"]
+[gd_scene load_steps=8 format=3 uid="uid://dibx1l6rj1yst"]
 
-[ext_resource type="Script" path="res://Scenes/root.gd" id="1_urxkh"]
 [ext_resource type="PackedScene" uid="uid://yiomnhy6tf0n" path="res://Scenes/rabbit.tscn" id="2_k7fxj"]
 [ext_resource type="PackedScene" uid="uid://dh8ekxmg0r8m7" path="res://player.tscn" id="3_yuc6l"]
 [ext_resource type="PackedScene" uid="uid://bys71blvtyvdj" path="res://Scenes/bush.tscn" id="4_5e8pb"]
@@ -17,7 +16,6 @@ size = Vector2(50, 50)
 points = PackedVector3Array(25.3919, 0.396748, 25.3919, -25.3919, -0.396748, -25.3919, -25.3919, 0.396748, -25.3919, 25.3919, -0.396748, -25.3919, -25.3919, -0.396748, 25.3919, -25.3919, 0.396748, 25.3919, 25.3919, 0.396748, -25.3919, 25.3919, -0.396748, 25.3919)
 
 [node name="Root" type="Node3D"]
-script = ExtResource("1_urxkh")
 
 [node name="Floor" type="StaticBody3D" parent="."]
 
@@ -27,6 +25,31 @@ skeleton = NodePath("../..")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Floor"]
 shape = SubResource("ConvexPolygonShape3D_6u5y4")
+
+[node name="Node" type="Node" parent="."]
+
+[node name="Rabbit" parent="Node" instance=ExtResource("2_k7fxj")]
+
+[node name="Rabbit2" parent="Node" node_paths=PackedStringArray("animation_player", "hunger", "starving", "breeding_timer") instance=ExtResource("2_k7fxj")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.5252, 0, 0)
+animation_player = NodePath("../Rabbit/AnimationPlayer")
+hunger = NodePath("../Rabbit/Hunger")
+starving = NodePath("../Rabbit/Starving")
+breeding_timer = NodePath("../Rabbit/Breeding")
+
+[node name="Rabbit3" parent="Node" node_paths=PackedStringArray("animation_player", "hunger", "starving", "breeding_timer") instance=ExtResource("2_k7fxj")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.5252, 0, 11.32)
+animation_player = NodePath("../Rabbit/AnimationPlayer")
+hunger = NodePath("../Rabbit/Hunger")
+starving = NodePath("../Rabbit/Starving")
+breeding_timer = NodePath("../Rabbit/Breeding")
+
+[node name="Rabbit4" parent="Node" node_paths=PackedStringArray("animation_player", "hunger", "starving", "breeding_timer") instance=ExtResource("2_k7fxj")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12.1454, 0, 11.32)
+animation_player = NodePath("../Rabbit/AnimationPlayer")
+hunger = NodePath("../Rabbit/Hunger")
+starving = NodePath("../Rabbit/Starving")
+breeding_timer = NodePath("../Rabbit/Breeding")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.301704, 0.953402, 0, -0.953402, 0.301704, 0, 5.59899, 0)
@@ -58,26 +81,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.6868, 0.151451, -14.0144)
 
 [node name="Tall Grass4" parent="." instance=ExtResource("4_gmhrp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.51605, 0.151451, -6.93757)
-
-[node name="Rabbit" parent="." instance=ExtResource("2_k7fxj")]
-
-[node name="Rabbit2" parent="." node_paths=PackedStringArray("animation_player", "hunger", "starving", "breeding_timer") instance=ExtResource("2_k7fxj")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.5252, 0, 0)
-animation_player = NodePath("../Rabbit/AnimationPlayer")
-hunger = NodePath("../Rabbit/Hunger")
-starving = NodePath("../Rabbit/Starving")
-breeding_timer = NodePath("../Rabbit/Breeding")
-
-[node name="Rabbit3" parent="." node_paths=PackedStringArray("animation_player", "hunger", "starving", "breeding_timer") instance=ExtResource("2_k7fxj")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.5252, 0, 11.32)
-animation_player = NodePath("../Rabbit/AnimationPlayer")
-hunger = NodePath("../Rabbit/Hunger")
-starving = NodePath("../Rabbit/Starving")
-breeding_timer = NodePath("../Rabbit/Breeding")
-
-[node name="Rabbit4" parent="." node_paths=PackedStringArray("animation_player", "hunger", "starving", "breeding_timer") instance=ExtResource("2_k7fxj")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12.1454, 0, 11.32)
-animation_player = NodePath("../Rabbit/AnimationPlayer")
-hunger = NodePath("../Rabbit/Hunger")
-starving = NodePath("../Rabbit/Starving")
-breeding_timer = NodePath("../Rabbit/Breeding")
