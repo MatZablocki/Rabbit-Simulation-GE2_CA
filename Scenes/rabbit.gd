@@ -15,7 +15,7 @@ enum states {WANDERING, FLEEING, BREEDING, WAITING}
 var state = states.WANDERING
 var target
 var direction
-var speed = 15
+var speed = 13
 var player
 var nearest_grass
 var breeding = false
@@ -37,6 +37,7 @@ func _process(delta):
 	pass
 	
 func _physics_process(delta):
+
 	if $Area3D.overlaps_body($"../Player"):
 		state = states.FLEEING
 		
@@ -46,20 +47,23 @@ func _physics_process(delta):
 		velocity += combined_force.normalized()*speed
 	elif(state == states.WANDERING):
 		to_nearest_grass()
-		print("'")
 		velocity = arrive_force(nearest_grass, 0.1)
 	elif(state == states.BREEDING):
 		velocity = Vector3.ZERO
 		state = states.WANDERING
 		breeding_timer.start()
 		get_parent().add(rabbit)
-	if(velocity.length()>0.1):
+	if(velocity.length()>0):
 		animation_player.play("hop")
 	else:
-		animation_player.play("RESET")
+		animation_player.stop()
+
 	move_and_slide()
-	
-	
+	#look_at(velocity.normalized())
+	#if velocity.length()>0:
+		#var direction = velocity.normalized()
+		#var tar = atan2(direction.x, direction.z)
+		#rotation.y = tar
 	pass
 	
 func seek_force(target: Vector3):	

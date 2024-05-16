@@ -41,8 +41,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.30686, 2.89319, 21.9785)
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -22.1263, 2.98651, 3.78754)
 
 [node name="Player" parent="." instance=ExtResource("3_yuc6l")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.7494, 0.893981, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.7494, 0.893981, 0)
 collision_layer = 3
+
+[node name="Rabbit5" parent="." instance=ExtResource("2_k7fxj")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12.2584, 0, -0.2673)
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.2584, 0, -25.2673)
@@ -60,9 +63,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.6868, 0.151451, -14.0144)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.51605, 0.151451, -6.93757)
 
 [node name="Rabbit" parent="." instance=ExtResource("2_k7fxj")]
+transform = Transform3D(-0.948837, 0, 0.315765, 0, 1, 0, -0.315765, 0, -0.948837, 0, 0, 0)
 
 [node name="Rabbit2" parent="." node_paths=PackedStringArray("animation_player", "hunger", "starving", "breeding_timer") instance=ExtResource("2_k7fxj")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.5252, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4.5252, 0, 0)
 animation_player = NodePath("../Rabbit/AnimationPlayer")
 hunger = NodePath("../Rabbit/Hunger")
 starving = NodePath("../Rabbit/Starving")
